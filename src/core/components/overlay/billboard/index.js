@@ -3,11 +3,11 @@
  * @Date: 2020-09-12 23:53:32
  */
 
-import DcBillboard from './billboard'
+import Billboard from './billboard'
 
 /* istanbul ignore next */
-DcBillboard.install = function(Vue) {
-  Vue.component(DcBillboard.name, DcBillboard)
+Billboard.install = function(Vue) {
+  Vue.component(Billboard.name, Billboard)
 }
 
-export default DcBillboard
+export default Billboard

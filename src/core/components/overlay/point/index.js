@@ -3,11 +3,11 @@
  * @Date: 2020-09-12 23:45:46
  */
 
-import DcPoint from './point'
+import Point from './point'
 
 /* istanbul ignore next */
-DcPoint.install = function(Vue) {
-  Vue.component(DcPoint.name, DcPoint)
+Point.install = function(Vue) {
+  Vue.component(Point.name, Point)
 }
 
-export default DcPoint
+export default Point

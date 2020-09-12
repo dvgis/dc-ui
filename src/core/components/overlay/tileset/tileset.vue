@@ -5,7 +5,7 @@ import comp from '../../../mixins/comp'
 import overlay from '../../../mixins/overlay'
 
 export default {
-  name: 'DcPolyline',
+  name: 'DcTileset',
   minixs: [comp, overlay],
   props: {
     position: [String, Array, Object],
@@ -18,11 +18,16 @@ export default {
       },
       immediate: true,
       deep: true
+    },
+    height(newVal, oldVal) {
+      this.$dcComp && this.$dcComp.setHeight(this.height)
     }
   },
   methods: {
     initComponent() {
       this.$dcComp = new DC.Polyline(this.positions)
+      this.position && this.$dcComp.setPosition(this.position)
+      this.height && this.$dcComp.setHeight(this.height)
     }
   }
 }

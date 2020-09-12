@@ -3,11 +3,11 @@
  * @Date: 2020-09-12 23:57:06
  */
 
-import DcPolygon from './polygon'
+import Polygon from './polygon'
 
 /* istanbul ignore next */
-DcPolygon.install = function(Vue) {
-  Vue.component(DcPolygon.name, DcPolygon)
+Polygon.install = function(Vue) {
+  Vue.component(Polygon.name, Polygon)
 }
 
-export default DcPolygon
+export default Polygon

@@ -3,11 +3,11 @@
  * @Date: 2020-09-12 21:28:52
  */
 
-import DcVectorLayer from './vector-layer'
+import VectorLayer from './vector-layer'
 
 /* istanbul ignore next */
-DcVectorLayer.install = function(Vue) {
-  Vue.component(DcVectorLayer.name, DcVectorLayer)
+VectorLayer.install = function(Vue) {
+  Vue.component(VectorLayer.name, VectorLayer)
 }
 
-export default DcVectorLayer
+export default VectorLayer

@@ -3,11 +3,11 @@
  * @Date: 2020-09-12 19:01:11
  */
 
-import DcViewer from './viewer'
+import Viewer from './viewer'
 
 /* istanbul ignore next */
-DcViewer.install = function(Vue) {
-  Vue.component(DcViewer.name, DcViewer)
+Viewer.install = function(Vue) {
+  Vue.component(Viewer.name, Viewer)
 }
 
-export default DcViewer
+export default Viewer

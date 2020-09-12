@@ -3,11 +3,11 @@
  * @Date: 2020-09-12 22:20:22
  */
 
-import DcTilesetLayer from './tileset-layer'
+import TilesetLayer from './tileset-layer'
 
 /* istanbul ignore next */
-DcTilesetLayer.install = function(Vue) {
-  Vue.component(DcTilesetLayer.name, DcTilesetLayer)
+TilesetLayer.install = function(Vue) {
+  Vue.component(TilesetLayer.name, TilesetLayer)
 }
 
-export default DcTilesetLayer
+export default TilesetLayer

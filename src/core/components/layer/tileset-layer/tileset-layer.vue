@@ -10,6 +10,7 @@ export default {
   methods: {
     initComponent() {
       this.$dcComp = new DC.TilesetLayer(this.id)
+      this.$dcComp.show = this.show
       this.$dcComp.attr = this.attr
       this.$children.forEach(component => {
         component.$emit('on-layer-ready', this.$dcComp)

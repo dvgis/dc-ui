@@ -3,11 +3,11 @@
  * @Date: 2020-09-12 22:09:53
  */
 
-import DcBaseLayer from './base-layer'
+import BaseLayer from './base-layer'
 
 /* istanbul ignore next */
-DcBaseLayer.install = function(Vue) {
-  Vue.component(DcBaseLayer.name, DcBaseLayer)
+BaseLayer.install = function(Vue) {
+  Vue.component(BaseLayer.name, BaseLayer)
 }
 
-export default DcBaseLayer
+export default BaseLayer

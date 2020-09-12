@@ -3,11 +3,11 @@
  * @Date: 2020-09-12 23:07:35
  */
 
-import DcGeoJsonLayer from './geojson-layer'
+import GeoJsonLayer from './geojson-layer'
 
 /* istanbul ignore next */
-DcGeoJsonLayer.install = function(Vue) {
-  Vue.component(DcGeoJsonLayer.name, DcGeoJsonLayer)
+GeoJsonLayer.install = function(Vue) {
+  Vue.component(GeoJsonLayer.name, GeoJsonLayer)
 }
 
-export default DcGeoJsonLayer
+export default GeoJsonLayer

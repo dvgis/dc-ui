@@ -3,11 +3,11 @@
  * @Date: 2020-09-13 00:01:26
  */
 
-import DcModel from './model'
+import Model from './model'
 
 /* istanbul ignore next */
-DcModel.install = function(Vue) {
-  Vue.component(DcModel.name, DcModel)
+Model.install = function(Vue) {
+  Vue.component(Model.name, Model)
 }
 
-export default DcModel
+export default Model

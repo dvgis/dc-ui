@@ -3,11 +3,11 @@
  * @Date: 2020-09-12 23:56:08
  */
 
-import DcPolyline from './polyline'
+import Polyline from './polyline'
 
 /* istanbul ignore next */
-DcPolyline.install = function(Vue) {
-  Vue.component(DcPolyline.name, DcPolyline)
+Polyline.install = function(Vue) {
+  Vue.component(Polyline.name, Polyline)
 }
 
-export default DcPolyline
+export default Polyline

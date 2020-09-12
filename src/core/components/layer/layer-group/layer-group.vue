@@ -15,14 +15,20 @@ export default {
       default: true
     }
   },
+  watch: {
+    show(newVal, oldVal) {
+      this.$dcComp && (this.$dcComp.show = newVal)
+    }
+  },
   methods: {
     initComponent() {
       this.$dcComp = new DC.LayerGroup(this.id)
+      this.$dcComp.show = this.show
       this.$children.forEach(component => {
         component.$emit('on-layer-group-ready', this.$dcComp)
       })
     },
-    addToViewer() {
+    _addToViewer() {
       this.$viewer && this.$viewer.addLayerGroup(this.$dcComp)
     }
   },
@@ -30,7 +36,7 @@ export default {
     this.registerComponent()
     this.$on('on-viewer-ready', this.onViewerReady)
   },
-  destroyed(){
+  destroyed() {
     this.$viewer && this.$viewer.removeLayerGroup(this.$dcComp)
   }
 }

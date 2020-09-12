@@ -52,6 +52,7 @@ export default {
   },
   methods: {
     _mountOverlay() {
+      this.$dcComp.show = this.show
       this.$dcComp.attr = this.attr
       this.id && (this.$dcComp.id = this.id)
       this.label && this.$dcComp.setLabel(this.label, this.labelStyle)

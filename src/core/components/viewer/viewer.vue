@@ -4,10 +4,12 @@
   </div>
 </template>
 
-<script>
+<script type="text/babel">
 import events from '../../mixins/events'
+
 export default {
   name: 'DcViewer',
+
   minixs: [events],
   props: {
     viewerId: {

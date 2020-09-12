@@ -6,8 +6,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const packageInfo = require('./package.json')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const JavaScriptObfuscator = require('webpack-obfuscator')
 
 function resolve(dir) {
@@ -33,17 +32,13 @@ module.exports = env => {
   const IS_PROD = (env && env.production) || false
   const publicPath = IS_PROD ? '/' : '/'
   let plugins = [
-    new MiniCssExtractPlugin({
-      filename: IS_PROD ? '[name].min.css' : '[name].css',
-      allChunks: true
-    }),
+    new VueLoaderPlugin(),
     new webpack.DefinePlugin({
       'build.version': JSON.stringify(packageInfo.version),
       'build.time': JSON.stringify(getTime())
     })
   ]
   if (IS_PROD) {
-    plugins.push(new OptimizeCssAssetsPlugin())
     plugins.push(new webpack.NoEmitOnErrorsPlugin())
     plugins.push(
       new JavaScriptObfuscator(
@@ -56,8 +51,7 @@ module.exports = env => {
   }
   return {
     entry: {
-      'dc.base': ['base'],
-      'dc.core': ['entry', 'theme']
+      'dc.ui': ['./src/index.js']
     },
     devtool: IS_PROD ? false : 'cheap-module-eval-source-map',
     output: {
@@ -82,46 +76,19 @@ module.exports = env => {
         },
         {
           test: /\.vue$/,
-          loader: 'vue-loader'
-        },
-        {
-          test: /\.css$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: 'css-loader'
-            },
-            {
-              loader: 'sass-loader'
-            }
-          ]
-        },
-        {
-          test: /\.scss$/,
-          use: [
-            MiniCssExtractPlugin.loader,
-            {
-              loader: 'css-loader'
-            },
-            {
-              loader: 'sass-loader'
-            }
-          ]
-        },
-        {
-          test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-          loader: 'url-loader',
+          loader: 'vue-loader',
           options: {
-            limit: 20000
+            compilerOptions: {
+              preserveWhitespace: false
+            }
           }
         }
       ]
     },
     resolve: {
-      extensions: ['.js', '.json', '.css'],
+      extensions: ['.js', '.json', '.css', '.vue'],
       alias: {
-        '@': resolve('src'),
-        entry: './src/index.js'
+        '@': resolve('src')
       }
     },
     plugins
