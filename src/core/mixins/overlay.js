@@ -63,7 +63,6 @@ export default {
     }
   },
   mounted() {
-    this.registerComponent()
     this.$on('on-layer-ready', this.onLayerReady)
   },
   destroyed() {

@@ -1,12 +1,13 @@
 <template></template>
 
 <script>
+import events from '../../../mixins/events'
 import comp from '../../../mixins/comp'
 import overlay from '../../../mixins/overlay'
 
 export default {
   name: 'DcBillboard',
-  minixs: [comp, overlay],
+  mixins: [comp, overlay, events],
   props: {
     position: {
       type: [String, Array, Object],

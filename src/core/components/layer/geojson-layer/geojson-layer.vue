@@ -6,7 +6,7 @@ import layer from '../../../mixins/layer'
 
 export default {
   name: 'DcGeoJsonLayer',
-  minixs: [comp, layer],
+  mixins: [comp, layer],
   props: {
     url: {
       type: String,

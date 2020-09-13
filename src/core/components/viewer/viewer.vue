@@ -10,11 +10,10 @@ import events from '../../mixins/events'
 export default {
   name: 'DcViewer',
 
-  minixs: [events],
+  mixins: [events],
   props: {
     viewerId: {
       type: String,
-      default: 'viewer-container',
       required: true
     },
     config: {

@@ -6,7 +6,7 @@ import layer from '../../../mixins/layer'
 
 export default {
   name: 'DcVectorLayer',
-  minixs: [comp, layer],
+  mixins: [comp, layer],
   methods: {
     initComponent() {
       this.$dcComp = new DC.VectorLayer(this.id)

@@ -1,12 +1,13 @@
 <template></template>
 
 <script>
+import events from '../../../mixins/events'
 import comp from '../../../mixins/comp'
 import overlay from '../../../mixins/overlay'
 
 export default {
   name: 'DcTileset',
-  minixs: [comp, overlay],
+  mixins: [events, comp, overlay],
   props: {
     position: [String, Array, Object],
     height: Number

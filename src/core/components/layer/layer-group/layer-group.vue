@@ -4,7 +4,7 @@ import comp from '../../../mixins/comp'
 
 export default {
   name: 'DcLayerGroup',
-  minixs: [comp],
+  mixins: [comp],
   props: {
     id: {
       type: String,

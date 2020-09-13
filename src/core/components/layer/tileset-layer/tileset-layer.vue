@@ -6,7 +6,7 @@ import layer from '../../../mixins/layer'
 
 export default {
   name: 'DcTilesetLayer',
-  minixs: [comp, layer],
+  mixins: [comp, layer],
   methods: {
     initComponent() {
       this.$dcComp = new DC.TilesetLayer(this.id)

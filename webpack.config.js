@@ -58,7 +58,10 @@ module.exports = env => {
       filename: IS_PROD ? '[name].min.js' : '[name].js',
       path: path.resolve(__dirname, 'dist'),
       publicPath: publicPath,
-      sourcePrefix: ''
+      sourcePrefix: '',
+      library: 'DcUI',
+      libraryTarget: 'umd',
+      umdNamedDefine: true
     },
     module: {
       unknownContextCritical: false,

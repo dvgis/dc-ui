@@ -34,8 +34,6 @@ export default {
     }
   },
   mounted() {
-    this.registerComponent()
-    this.$on('on-viewer-ready', this.onViewerReady)
     this.$on('on-layer-group-ready', this.onLayerGroupReady)
   },
   destroyed() {
