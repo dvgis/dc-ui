@@ -12,9 +12,10 @@
   "plugins": ["prettier"],
   "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "globals": {
+    "__VERSION__": false,
+    "__TIME__": false,
     "Vue": false,
     "DC": false,
-    "build": false,
     "Cesium": false
   },
   "rules": {

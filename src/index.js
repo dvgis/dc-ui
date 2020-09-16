@@ -51,8 +51,8 @@ if (typeof window !== 'undefined' && window.Vue) {
 }
 
 export default {
-  version: build.version,
-  compileTime: build.time,
+  version: __VERSION__,
+  compile_time: __TIME__,
   install,
   Viewer,
   BaseLayer,

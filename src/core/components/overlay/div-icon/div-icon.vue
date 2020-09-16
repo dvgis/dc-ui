@@ -1,39 +1,42 @@
-<template></template>
+<template>
+  <i
+    class="dc-div-icon"
+    :data-count="overlays.length"
+    style="display: none !important;"
+  ></i>
+</template>
 
 <script>
-import events from '../../../mixins/events'
-import comp from '../../../mixins/comp'
 import overlay from '../../../mixins/overlay'
+import { Util } from '@/core/utils'
 
 export default {
   name: 'DcDivIcon',
-  mixins: [events, comp, overlay],
+  mixins: [overlay],
   props: {
-    position: {
-      type: [String, Array, Object],
+    contentKey: {
+      type: String,
       required: true
-    },
-    content: {
-      type: [String, Object],
-      required: true
-    }
-  },
-  watch: {
-    position: {
-      handler(newVal, oldVal) {
-        this.$dcComp && (this.$dcComp.position = newVal)
-      },
-      immediate: true,
-      deep: true
-    },
-    content(newVal, oldVal) {
-      this.$dcComp && (this.$dcComp.content = newVal)
     }
   },
   methods: {
     initComponent() {
-      this.$dcComp = new DC.DivIcon(this.position, this.content)
-      this._mountOverlay && this._mountOverlay()
+      if (!this.$dcReady) {
+        return
+      }
+      this.$dcComp = []
+      if (Array.isArray(this.overlays)) {
+        let position = undefined
+        let divIcon = undefined
+        this.overlays.forEach(overlay => {
+          position = Util.createPosition(overlay, this.positionKey)
+          if (position && this.contentKey) {
+            divIcon = new DC.DivIcon(position, overlay[this.contentKey])
+          }
+          this.$dcComp.push(divIcon)
+        })
+        this._mountOverlays && this._mountOverlays()
+      }
     }
   }
 }

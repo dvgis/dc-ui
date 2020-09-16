@@ -1,39 +1,42 @@
-<template></template>
+<template>
+  <i
+    class="dc-label"
+    :data-count="overlays.length"
+    style="display: none !important;"
+  ></i>
+</template>
 
 <script>
-import events from '../../../mixins/events'
-import comp from '../../../mixins/comp'
+import { Util } from '../../../utils'
 import overlay from '../../../mixins/overlay'
 
 export default {
-  name: 'DcModel',
-  mixins: [events, comp, overlay],
+  name: 'DcLabel',
+  mixins: [overlay],
   props: {
-    position: {
-      type: [String, Array, Object],
-      required: true
-    },
-    text: {
+    textKey: {
       type: String,
       required: true
     }
   },
-  watch: {
-    position: {
-      handler(newVal, oldVal) {
-        this.$dcComp && (this.$dcComp.position = newVal)
-      },
-      immediate: true,
-      deep: true
-    },
-    text(newVal, oldVal) {
-      this.$dcComp && (this.$dcComp.text = newVal)
-    }
-  },
   methods: {
     initComponent() {
-      this.$dcComp = new DC.Model(this.position, this.text)
-      this._mountOverlay && this._mountOverlay()
+      if (!this.$dcReady) {
+        return
+      }
+      this.$dcComp = []
+      if (Array.isArray(this.overlays)) {
+        let position = undefined
+        let label = undefined
+        this.overlays.forEach(overlay => {
+          position = Util.createPosition(overlay, this.positionKey)
+          if (position && this.textKey) {
+            label = new DC.Label(position, overlay[this.textKey])
+          }
+          this.$dcComp.push(label)
+        })
+        this._mountOverlays && this._mountOverlays()
+      }
     }
   }
 }

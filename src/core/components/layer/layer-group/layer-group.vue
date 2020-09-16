@@ -1,4 +1,9 @@
-<template></template>
+<template>
+  <i class="dc-layer-group" :id="id" style="display: none !important;">
+    <slot></slot
+  ></i>
+</template>
+
 <script>
 import comp from '../../../mixins/comp'
 
@@ -22,6 +27,9 @@ export default {
   },
   methods: {
     initComponent() {
+      if (!this.$dcReady) {
+        return
+      }
       this.$dcComp = new DC.LayerGroup(this.id)
       this.$dcComp.show = this.show
       this.$children.forEach(component => {
@@ -33,7 +41,6 @@ export default {
     }
   },
   mounted() {
-    this.registerComponent()
     this.$on('on-viewer-ready', this.onViewerReady)
   },
   destroyed() {

@@ -1,32 +1,45 @@
-<template></template>
+<template>
+  <i
+    class="dc-polyline"
+    :data-count="overlays.length"
+    style="display: none !important;"
+  ></i>
+</template>
 
 <script>
-import events from '../../../mixins/events'
-import comp from '../../../mixins/comp'
 import overlay from '../../../mixins/overlay'
 
 export default {
   name: 'DcPolyline',
-  mixins: [events, comp, overlay],
+  mixins: [overlay],
   props: {
-    positions: {
-      type: [String, Array],
-      required: true
-    }
-  },
-  watch: {
-    positions: {
-      handler(newVal, oldVal) {
-        this.$dcComp && (this.$dcComp.positions = newVal)
-      },
-      immediate: true,
-      deep: true
+    positionKey: {
+      type: String,
+      default: function() {
+        return 'coords'
+      }
     }
   },
   methods: {
     initComponent() {
-      this.$dcComp = new DC.Polyline(this.positions)
-      this._mountOverlay && this._mountOverlay()
+      if (!this.$dcReady) {
+        return
+      }
+      this.$dcComp = []
+      if (Array.isArray(this.overlays)) {
+        this.overlays.forEach(overlay => {
+          let positions = undefined
+          let polyline = undefined
+          if (this.positionKey && this.positionKey) {
+            positions = overlay[this.positionKey]
+            if (positions) {
+              polyline = new DC.Polyline(positions)
+            }
+            this.$dcComp.push(polyline)
+          }
+        })
+        this._mountOverlays && this._mountOverlays()
+      }
     }
   }
 }

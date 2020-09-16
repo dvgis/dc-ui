@@ -1,44 +1,42 @@
-<template></template>
+<template>
+  <i
+    class="dc-model"
+    :data-count="overlays.length"
+    style="display: none !important;"
+  ></i>
+</template>
 
 <script>
-import events from '../../../mixins/events'
-import comp from '../../../mixins/comp'
+import { Util } from '../../../utils'
 import overlay from '../../../mixins/overlay'
 
 export default {
   name: 'DcModel',
-  mixins: [events, comp, overlay],
+  mixins: [overlay],
   props: {
-    position: {
-      type: [String, Array, Object],
-      required: true
-    },
-    modelUrl: {
+    urlKey: {
       type: String,
       required: true
-    },
-    rotateAmount: Number
-  },
-  watch: {
-    position: {
-      handler(newVal, oldVal) {
-        this.$dcComp && (this.$dcComp.position = newVal)
-      },
-      immediate: true,
-      deep: true
-    },
-    modelUrl(newVal, oldVal) {
-      this.$dcComp && (this.$dcComp.modelUrl = newVal)
-    },
-    rotateAmount(newVal, oldVal) {
-      this.$dcComp && (this.$dcComp.rotateAmount = newVal)
     }
   },
   methods: {
     initComponent() {
-      this.$dcComp = new DC.Model(this.position, this.modelUrl)
-      this.$dcComp.rotateAmount = this.rotateAmount || 0
-      this._mountOverlay && this._mountOverlay()
+      if (!this.$dcReady) {
+        return
+      }
+      this.$dcComp = []
+      if (Array.isArray(this.overlays)) {
+        let position = undefined
+        let model = undefined
+        this.overlays.forEach(overlay => {
+          position = Util.createPosition(overlay, this.positionKey)
+          if (position && this.urlKey) {
+            model = new DC.Model(position, overlay[this.urlKey])
+          }
+          this.$dcComp.push(model)
+        })
+        this._mountOverlays && this._mountOverlays()
+      }
     }
   }
 }

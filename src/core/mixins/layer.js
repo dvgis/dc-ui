@@ -3,7 +3,10 @@
  * @Date: 2020-09-12 21:59:32
  */
 
+import comp from './comp'
+
 export default {
+  mixins: [comp],
   props: {
     id: {
       type: String,
@@ -34,6 +37,7 @@ export default {
     }
   },
   mounted() {
+    this.$on('on-viewer-ready', this.onViewerReady)
     this.$on('on-layer-group-ready', this.onLayerGroupReady)
   },
   destroyed() {

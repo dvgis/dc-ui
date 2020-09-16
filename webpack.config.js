@@ -34,8 +34,8 @@ module.exports = env => {
   let plugins = [
     new VueLoaderPlugin(),
     new webpack.DefinePlugin({
-      'build.version': JSON.stringify(packageInfo.version),
-      'build.time': JSON.stringify(getTime())
+      __VERSION__: JSON.stringify(packageInfo.version),
+      __TIME__: JSON.stringify(getTime())
     })
   ]
   if (IS_PROD) {
@@ -58,7 +58,6 @@ module.exports = env => {
       filename: IS_PROD ? '[name].min.js' : '[name].js',
       path: path.resolve(__dirname, 'dist'),
       publicPath: publicPath,
-      sourcePrefix: '',
       library: 'DcUI',
       libraryTarget: 'umd',
       umdNamedDefine: true

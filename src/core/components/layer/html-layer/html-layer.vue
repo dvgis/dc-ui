@@ -1,14 +1,20 @@
-<template></template>
+<template>
+  <i class="dc-html-layer" :id="id" style="display: none !important;">
+    <slot></slot
+  ></i>
+</template>
 
 <script>
-import comp from '../../../mixins/comp'
 import layer from '../../../mixins/layer'
 
 export default {
-  name: 'DcVectorLayer',
-  mixins: [comp, layer],
+  name: 'DcHtmlLayer',
+  mixins: [layer],
   methods: {
     initComponent() {
+      if (!this.$dcReady) {
+        return
+      }
       this.$dcComp = new DC.HtmlLayer(this.id)
       this.$dcComp.attr = this.attr
       this.$dcComp.show = this.show

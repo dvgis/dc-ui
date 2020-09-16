@@ -1,34 +1,60 @@
-<template></template>
+<template>
+  <i
+    class="dc-tileset"
+    :data-count="overlays.length"
+    style="display: none !important;"
+  ></i>
+</template>
 
 <script>
-import events from '../../../mixins/events'
-import comp from '../../../mixins/comp'
+import { Util } from '../../../utils'
 import overlay from '../../../mixins/overlay'
 
 export default {
   name: 'DcTileset',
-  mixins: [events, comp, overlay],
+  mixins: [overlay],
   props: {
-    position: [String, Array, Object],
-    height: Number
-  },
-  watch: {
-    position: {
-      handler(newVal, oldVal) {
-        this.$dcComp && this.$dcComp.setPosition(newVal)
-      },
-      immediate: true,
-      deep: true
+    urlKey: {
+      type: String,
+      required: true
     },
-    height(newVal, oldVal) {
-      this.$dcComp && this.$dcComp.setHeight(this.height)
-    }
+    options:Object,
+    scaleCondition: Object,
+    heightCondition: Object
   },
   methods: {
     initComponent() {
-      this.$dcComp = new DC.Polyline(this.positions)
-      this.position && this.$dcComp.setPosition(this.position)
-      this.height && this.$dcComp.setHeight(this.height)
+      if (!this.$dcReady) {
+        return
+      }
+      this.$dcComp = []
+      if (Array.isArray(this.overlays)) {
+        let tileset = undefined
+        let position = undefined
+        let scale = 1
+        let height = 0
+        this.overlays.forEach(overlay => {
+          if (this.urlKey) {
+            tileset = new DC.Tileset(overlay[this.urlKey],this.options)
+          }
+          if (this.positionKey) {
+            position = Util.createPosition(overlay, this.positionKey)
+            if (position && !!position.lng && !!position.lat) {
+              tileset.setPosition(position)
+            }
+          }
+          if (this.scaleCondition) {
+            scale = Util.getConditionValue(overlay, this.scaleCondition, 1)
+            scale !== 1 && tileset.setScale(scale)
+          }
+          if (this.heightCondition) {
+            height = Util.getConditionValue(overlay, this.heightCondition, 0)
+            !!height && tileset.setHeight(height)
+          }
+          this.$dcComp.push(tileset)
+        })
+        this._mountOverlays && this._mountOverlays()
+      }
     }
   }
 }

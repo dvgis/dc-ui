@@ -1,4 +1,10 @@
-<template></template>
+<template>
+  <i
+    class="base-layer"
+    :data-type="layerType"
+    style="display: none !important;"
+  ></i>
+</template>
 
 <script>
 import comp from '../../mixins/comp'
@@ -17,6 +23,9 @@ export default {
   },
   methods: {
     initComponent() {
+      if (!this.$dcReady) {
+        return
+      }
       this.$dcComp = []
       if (this.options && Array.isArray(this.options)) {
         this.options.forEach(item => {
@@ -40,6 +49,9 @@ export default {
           iconUrl: this.iconUrl
         })
     }
+  },
+  mounted() {
+    this.$on('on-viewer-ready', this.onViewerReady)
   },
   destroyed() {}
 }

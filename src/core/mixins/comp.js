@@ -5,24 +5,26 @@
 
 export default {
   methods: {
-    registerComponent() {
-      this.initComponent && this.initComponent()
+    onDcReady() {
+      this.$dcReady = true
     },
     onViewerReady(viewer) {
       this.$viewer = viewer
-      this.registerComponent()
+      this.initComponent && this.initComponent()
       this._addToViewer && this._addToViewer()
     },
     onLayerGroupReady(layerGroup) {
       this.$layerGroup = layerGroup
+      this.initComponent && this.initComponent()
       this._addToLayerGroup && this._addToLayerGroup()
     },
     onLayerReady(layer) {
       this.$layer = layer
+      this.initComponent && this.initComponent()
       this._addToLayer && this._addToLayer()
     }
   },
   mounted() {
-    this.$on('on-viewer-ready', this.onViewerReady)
+    this.$on('on-dc-ready', this.onDcReady)
   }
 }

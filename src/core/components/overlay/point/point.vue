@@ -1,32 +1,35 @@
-<template></template>
-
+<template>
+  <i
+    class="dc-point"
+    :data-count="overlays.length"
+    style="display: none !important;"
+  ></i>
+</template>
 <script>
-import events from '../../../mixins/events'
-import comp from '../../../mixins/comp'
+import { Util } from '../../../utils'
 import overlay from '../../../mixins/overlay'
 
 export default {
   name: 'DcPoint',
-  mixins: [events, comp, overlay],
-  props: {
-    position: {
-      type: [String, Array, Object],
-      required: true
-    }
-  },
-  watch: {
-    position: {
-      handler(newVal, oldVal) {
-        this.$dcComp && (this.$dcComp.position = newVal)
-      },
-      immediate: true,
-      deep: true
-    }
-  },
+  mixins: [overlay],
   methods: {
     initComponent() {
-      this.$dcComp = new DC.Point(this.position)
-      this._mountOverlay && this._mountOverlay()
+      if (!this.$dcReady) {
+        return
+      }
+      this.$dcComp = []
+      if (Array.isArray(this.overlays)) {
+        let position = undefined
+        let point = undefined
+        this.overlays.forEach(overlay => {
+          position = Util.createPosition(overlay, this.positionKey)
+          if (position) {
+            point = new DC.Point(position)
+          }
+          this.$dcComp.push(point)
+        })
+        this._mountOverlays && this._mountOverlays()
+      }
     }
   }
 }

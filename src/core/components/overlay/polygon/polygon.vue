@@ -1,32 +1,43 @@
-<template></template>
+<template>
+  <i
+    class="dc-polygon"
+    :data-count="overlays.length"
+    style="display: none !important;"
+  ></i>
+</template>
 
 <script>
-import events from '../../../mixins/events'
-import comp from '../../../mixins/comp'
 import overlay from '../../../mixins/overlay'
 
 export default {
   name: 'DcPolygon',
-  mixins: [events, comp, overlay],
+  mixins: [overlay],
   props: {
-    positions: {
-      type: [String, Array],
-      required: true
-    }
-  },
-  watch: {
-    positions: {
-      handler(newVal, oldVal) {
-        this.$dcComp && (this.$dcComp.positions = newVal)
-      },
-      immediate: true,
-      deep: true
+    positionKey: {
+      type: String,
+      default: function() {
+        return 'coords'
+      }
     }
   },
   methods: {
     initComponent() {
-      this.$dcComp = new DC.Polygon(this.positions)
-      this._mountOverlay && this._mountOverlay()
+      if (!this.$dcReady) {
+        return
+      }
+      this.$dcComp = []
+      if (Array.isArray(this.overlays)) {
+        let positions = undefined
+        let polygon = undefined
+        this.overlays.forEach(overlay => {
+          positions = overlay[this.positionKey]
+          if (positions) {
+            polygon = new DC.Polygon(positions)
+          }
+          this.$dcComp.push(polygon)
+        })
+        this._mountOverlays && this._mountOverlays()
+      }
     }
   }
 }

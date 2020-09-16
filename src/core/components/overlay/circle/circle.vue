@@ -1,39 +1,42 @@
-<template></template>
+<template>
+  <i
+    class="dc-circle"
+    :data-count="overlays.length"
+    style="display: none !important;"
+  ></i>
+</template>
 
 <script>
-import events from '../../../mixins/events'
-import comp from '../../../mixins/comp'
 import overlay from '../../../mixins/overlay'
+import { Util } from '@/core/utils'
 
 export default {
-  name: 'DcBillboard',
-  mixins: [events, comp, overlay],
+  name: 'DcCircle',
+  mixins: [overlay],
   props: {
-    position: {
-      type: [String, Array, Object],
+    radiusKey: {
+      type: String,
       required: true
-    },
-    radius: {
-      type: Number,
-      required: true
-    }
-  },
-  watch: {
-    position: {
-      handler(newVal, oldVal) {
-        this.$dcComp && (this.$dcComp.position = newVal)
-      },
-      immediate: true,
-      deep: true
-    },
-    radius(newVal, oldVal) {
-      this.$dcComp && (this.$dcComp.radius = newVal)
     }
   },
   methods: {
     initComponent() {
-      this.$dcComp = new DC.Circle(this.position, this.radius)
-      this._mountOverlay && this._mountOverlay()
+      if (!this.$dcReady) {
+        return
+      }
+      this.$dcComp = []
+      if (Array.isArray(this.overlays)) {
+        let position = undefined
+        let circle = undefined
+        this.overlays.forEach(overlay => {
+          position = Util.createPosition(overlay, this.positionKey)
+          if (position && this.radiusKey) {
+            circle = new DC.Circle(position, +overlay[this.radiusKey] || 0)
+          }
+          this.$dcComp.push(circle)
+        })
+        this._mountOverlays && this._mountOverlays()
+      }
     }
   }
 }

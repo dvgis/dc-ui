@@ -1,53 +1,43 @@
-<template></template>
+<template>
+  <i
+    class="dc-billboard"
+    :data-count="overlays.length"
+    style="display: none !important;"
+  ></i>
+</template>
 
 <script>
-import events from '../../../mixins/events'
-import comp from '../../../mixins/comp'
+import { Util } from '../../../utils'
 import overlay from '../../../mixins/overlay'
 
 export default {
   name: 'DcBillboard',
-  mixins: [comp, overlay, events],
+  mixins: [overlay],
   props: {
-    position: {
-      type: [String, Array, Object],
-      required: true
-    },
-    icon: {
+    iconKey: {
       type: String,
       required: true
-    },
-    size: {
-      type: Array,
-      default: function() {
-        return [32, 32]
-      }
-    }
-  },
-  watch: {
-    position: {
-      handler(newVal, oldVal) {
-        this.$dcComp && (this.$dcComp.position = newVal)
-      },
-      immediate: true,
-      deep: true
-    },
-    icon(newVal, oldVal) {
-      this.$dcComp && (this.$dcComp.icon = newVal)
-    },
-    size: {
-      handler(newVal, oldVal) {
-        this.$dcComp && (this.$dcComp.size = newVal)
-      },
-      immediate: true,
-      deep: true
     }
   },
   methods: {
+    _setSize() {},
     initComponent() {
-      this.$dcComp = new DC.Billboard(this.position, this.icon)
-      this.$dcComp.size = this.size
-      this._mountOverlay && this._mountOverlay()
+      if (!this.$dcReady) {
+        return false
+      }
+      this.$dcComp = []
+      if (Array.isArray(this.overlays)) {
+        let position = undefined
+        let billboard = undefined
+        this.overlays.forEach(overlay => {
+          position = Util.createPosition(overlay, this.positionKey)
+          if (position && this.iconKey) {
+            billboard = new DC.Billboard(position, overlay[this.iconKey])
+          }
+          this.$dcComp.push(billboard)
+        })
+        this._mountOverlays && this._mountOverlays()
+      }
     }
   }
 }

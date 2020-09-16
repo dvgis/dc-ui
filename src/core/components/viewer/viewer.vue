@@ -9,7 +9,6 @@ import events from '../../mixins/events'
 
 export default {
   name: 'DcViewer',
-
   mixins: [events],
   props: {
     viewerId: {
@@ -51,8 +50,18 @@ export default {
     }
   },
   methods: {
+    broadcast(component) {
+      let _this = this
+      if (component.$children && component.$children.length > 0) {
+        component.$children.forEach(item => {
+          item.$emit('on-dc-ready')
+          _this.broadcast(item)
+        })
+      }
+    },
     initViewer() {
       DC.ready(() => {
+        this.broadcast(this)
         this.$dcComp = new DC.Viewer(this.viewerId, this.config)
         this.$dcComp.setOptions(this.options)
         this.$dcComp.tooltip.enable = this.enableTooltip
