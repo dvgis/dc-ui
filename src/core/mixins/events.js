@@ -89,7 +89,10 @@ export default {
         default:
           break
       }
-      callback && component.on && component.on(type, callback, this)
+      callback &&
+        component &&
+        component.on &&
+        component.on(type, callback, this)
     },
     registerEvents() {
       if (this.events && this.events.length) {

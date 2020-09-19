@@ -22,6 +22,11 @@ export default {
       this.$layer = layer
       this.initComponent && this.initComponent()
       this._addToLayer && this._addToLayer()
+    },
+    onRoamingControllerReady(controller) {
+      this.$controller = controller
+      this.initComponent && this.initComponent()
+      this._addToController && this._addToController()
     }
   },
   mounted() {

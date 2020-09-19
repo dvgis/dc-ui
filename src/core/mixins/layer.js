@@ -25,10 +25,19 @@ export default {
   },
   watch: {
     show(newVal, oldVal) {
-      this.$dcComp && (this.$dcComp.show = newVal)
+      this._setVisible(newVal)
+    },
+    attr(newVal, oldVal) {
+      this._setAttr(newVal)
     }
   },
   methods: {
+    _setVisible(visible) {
+      this.$dcComp && (this.$dcComp.show = visible)
+    },
+    _setAttr(attr) {
+      this.$dcComp && (this.$dcComp.attr = attr)
+    },
     _addToViewer() {
       this.$viewer && this.$viewer.addLayer(this.$dcComp)
     },
