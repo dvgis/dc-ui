@@ -5,6 +5,7 @@
 
 import Viewer from './core/components/viewer'
 import BaseLayer from './core/components/base-layer'
+import Terrain from './core/components/terrain'
 import LayerGroup from './core/components/layer/layer-group'
 import VectorLayer from './core/components/layer/vector-layer'
 import HtmlLayer from './core/components/layer/html-layer'
@@ -23,6 +24,7 @@ import Tileset from './core/components/overlay/tileset'
 const components = [
   Viewer,
   BaseLayer,
+  Terrain,
   LayerGroup,
   VectorLayer,
   HtmlLayer,

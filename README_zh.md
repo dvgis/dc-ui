@@ -1,9 +1,10 @@
 # DC-UI
 
 <p>
+<img src="https://img.shields.io/github/workflow/status/dvgis/dc-ui/publish"/>
 <img src="https://img.shields.io/badge/license-MIT-blue"/>
-<img src="https://img.shields.io/github/package-json/v/dvgis/dc-ui?color=orange&logo=github" />
-<img src="https://img.shields.io/npm/dw/@dvgis/dc-ui?logo=npm"/>
+<img src="https://img.shields.io/npm/v/@dvgis/dc-ui?color=orange&logo=npm" />
+<img src="https://img.shields.io/npm/dm/@dvgis/dc-ui?logo=npm"/>
 </p>
 
 [**🇨🇳 中文**](./README_zh.md) | [**🇬🇧English**](./README.md)
