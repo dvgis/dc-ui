@@ -1,6 +1,6 @@
 {
   "name": "@dvgis/dc-ui",
-  "version": "1.0.0Beta",
+  "version": "1.0.0_beta",
   "main": "./dist/dc-ui.min.js",
   "repository": "https://github.com/dvgis/dc-ui.git",
   "author": "Caven Chen <cavencj@gmail.com>",
