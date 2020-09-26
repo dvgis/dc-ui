@@ -79,6 +79,7 @@ module.exports = {
 ## 开始
 
 ```js
+global.DC = DC 
 DC.use(DcCore)
 Vue.use(DcUI)
 ```
