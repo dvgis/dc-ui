@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     initComponent() {
-      if (!this.$dcReady) {
+      if (!this.$dcReady || !DC.LayerGroup) {
         return
       }
       this.$dcComp = new DC.LayerGroup(this.id)

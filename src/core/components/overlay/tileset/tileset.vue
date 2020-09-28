@@ -18,13 +18,13 @@ export default {
       type: String,
       required: true
     },
-    options:Object,
-    scaleCondition: Object,
-    heightCondition: Object
+    optionsKey: String,
+    heightKey: String,
+    scaleKey: String
   },
   methods: {
     initComponent() {
-      if (!this.$dcReady) {
+      if (!this.$dcReady || !DC.Tileset) {
         return
       }
       this.$dcComp = []
@@ -35,7 +35,10 @@ export default {
         let height = 0
         this.overlays.forEach(overlay => {
           if (this.urlKey) {
-            tileset = new DC.Tileset(overlay[this.urlKey],this.options)
+            tileset = new DC.Tileset(
+              overlay[this.urlKey],
+              overlay[this.optionsKey] || {}
+            )
           }
           if (this.positionKey) {
             position = Util.createPosition(overlay, this.positionKey)
@@ -43,13 +46,13 @@ export default {
               tileset.setPosition(position)
             }
           }
-          if (this.scaleCondition) {
-            scale = Util.getConditionValue(overlay, this.scaleCondition, 1)
-            scale !== 1 && tileset.setScale(scale)
+          if (this.scaleKey) {
+            scale = overlay[this.scaleKey]
+            !!scale && scale !== 1 && tileset.setScale(+scale)
           }
-          if (this.heightCondition) {
-            height = Util.getConditionValue(overlay, this.heightCondition, 0)
-            !!height && tileset.setHeight(height)
+          if (this.heightKey) {
+            height = overlay[this.heightKey]
+            !!height && tileset.setHeight(+height)
           }
           this.$dcComp.push(tileset)
         })

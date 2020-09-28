@@ -1,7 +1,5 @@
 <template>
-  <i class="dc-roaming-path" :id="id" style="display: none !important;">
-    <slot></slot
-    ></i>
+  <i class="dc-roaming-path" :id="id" style="display: none !important;"> </i>
 </template>
 
 <script>
@@ -15,7 +13,6 @@ export default {
       type: String,
       required: true
     },
-
     endTIme: Date,
     duration: Number,
     state: String

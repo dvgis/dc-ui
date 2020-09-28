@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     initComponent() {
-      if (!this.$dcReady) {
+      if (!this.$dcReady || !DC.Label) {
         return
       }
       this.$dcComp = []

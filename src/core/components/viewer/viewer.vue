@@ -21,6 +21,10 @@ export default {
         return {}
       }
     },
+    sceneMode: {
+      type: Number,
+      default: 3
+    },
     options: {
       type: Object,
       default: function() {
@@ -36,6 +40,10 @@ export default {
       default: false
     },
     enableLocationBar: {
+      type: Boolean,
+      default: false
+    },
+    enableHawkeyeMap: {
       type: Boolean,
       default: false
     }
@@ -62,11 +70,15 @@ export default {
     initViewer() {
       DC.ready(() => {
         this.broadcast(this)
-        this.$dcComp = new DC.Viewer(this.viewerId, this.config)
+        this.$dcComp = new DC.Viewer(this.viewerId, {
+          ...this.config,
+          sceneMode: this.sceneMode
+        })
         this.$dcComp.setOptions(this.options)
         this.$dcComp.tooltip.enable = this.enableTooltip
         this.$dcComp.compass.enable = this.enableCompass
         this.$dcComp.locationBar.enable = this.enableLocationBar
+        this.$dcComp.hawkeyeMap.enable = this.enableHawkeyeMap
         this.registerEvents()
         this.$children.forEach(component => {
           component.$emit('on-viewer-ready', this.$dcComp)

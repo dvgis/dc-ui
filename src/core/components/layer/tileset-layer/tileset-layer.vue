@@ -12,7 +12,7 @@ export default {
   mixins: [layer],
   methods: {
     initComponent() {
-      if (!this.$dcReady) {
+      if (!this.$dcReady || !DC.TilesetLayer) {
         return
       }
       this.$dcComp = new DC.TilesetLayer(this.id)

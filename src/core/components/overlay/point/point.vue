@@ -14,7 +14,7 @@ export default {
   mixins: [overlay],
   methods: {
     initComponent() {
-      if (!this.$dcReady) {
+      if (!this.$dcReady || !DC.Point) {
         return
       }
       this.$dcComp = []

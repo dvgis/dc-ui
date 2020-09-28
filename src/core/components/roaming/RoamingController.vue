@@ -59,7 +59,7 @@ export default {
      * @private
      */
     _setState(state) {
-      if (!this.$dcComp) {
+      if (!this.$dcComp || !DC.RoamingController) {
         return
       }
       if (state === DC.State.PLAY) {

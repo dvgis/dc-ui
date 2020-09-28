@@ -51,17 +51,17 @@ export default {
             this.$emit('on-mouse-out', e)
           }
           break
-        case DC.MouseEventType.CAMERA_MOVE_END:
+        case DC.SceneEventType.CAMERA_MOVE_END:
           callback = e => {
             this.$emit('on-camera-move-end', e)
           }
           break
-        case DC.MouseEventType.CAMERA_CHANGED:
+        case DC.SceneEventType.CAMERA_CHANGED:
           callback = e => {
             this.$emit('on-camera-changed', e)
           }
           break
-        case DC.MouseEventType.PRE_UPDATE:
+        case DC.SceneEventType.PRE_UPDATE:
           callback = e => {
             this.$emit('on-pre-update', e)
           }
@@ -71,17 +71,17 @@ export default {
             this.$emit('on-post-update', e)
           }
           break
-        case DC.MouseEventType.PRE_RENDER:
+        case DC.SceneEventType.PRE_RENDER:
           callback = e => {
             this.$emit('on-pre-render', e)
           }
           break
-        case DC.MouseEventType.POST_RENDER:
+        case DC.SceneEventType.POST_RENDER:
           callback = e => {
             this.$emit('on-post-render', e)
           }
           break
-        case DC.MouseEventType.MORPH_COMPLETE:
+        case DC.SceneEventType.MORPH_COMPLETE:
           callback = e => {
             this.$emit('on-morph-complete', e)
           }

@@ -22,7 +22,7 @@ export default {
   methods: {
     _setSize() {},
     initComponent() {
-      if (!this.$dcReady) {
+      if (!this.$dcReady || !DC.Billboard) {
         return false
       }
       this.$dcComp = []
