@@ -11,7 +11,7 @@
 
 > DC-UI is a component library based on vue2.x and DC-SDK.
 
-> [Home Page](http://dc.dvgis.cn)
+> [Home Page](http://ui.dvgis.cn/dc-ui)
 
 ```warningH
 Tips：This SDK is JS+GIS framework package. Developers need to have some front-end technology and GIS related technology

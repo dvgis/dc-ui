@@ -11,7 +11,7 @@
 
 > DC-UI 是基于 Vue2.x 和 DC-SDK 的组件库。
 
-> [主页](http://dc.dvgis.cn)
+> [主页](http://ui.dvgis.cn/dc-ui)
 
 ```warning
 Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技术和 GIS 相关技术
