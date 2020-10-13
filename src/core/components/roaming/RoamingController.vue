@@ -71,7 +71,7 @@ export default {
       }
     },
     initComponent() {
-      if (!this.$dcReady) {
+      if (!DC.Initialized || !DC.RoamingController) {
         return
       }
       this.$dcComp = new DC.RoamingController(this.$viewer)

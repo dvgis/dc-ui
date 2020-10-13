@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     initComponent() {
-      if (!this.$dcReady || !DC.Tileset) {
+      if (!DC.Initialized || !DC.Tileset) {
         return
       }
       this.$dcComp = []

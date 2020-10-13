@@ -58,34 +58,28 @@ export default {
     }
   },
   methods: {
-    broadcast(component) {
-      let _this = this
-      if (component.$children && component.$children.length > 0) {
-        component.$children.forEach(item => {
-          item.$emit('on-dc-ready')
-          _this.broadcast(item)
-        })
-      }
-    },
     initViewer() {
-      DC.ready(() => {
-        this.broadcast(this)
-        this.$dcComp = new DC.Viewer(this.viewerId, {
-          ...this.config,
-          sceneMode: this.sceneMode
-        })
-        this.$dcComp.setOptions(this.options)
-        this.$dcComp.tooltip.enable = this.enableTooltip
-        this.$dcComp.compass.enable = this.enableCompass
-        this.$dcComp.locationBar.enable = this.enableLocationBar
-        this.$dcComp.hawkeyeMap.enable = this.enableHawkeyeMap
-        this.registerEvents()
-        this.$children.forEach(component => {
-          component.$emit('on-viewer-ready', this.$dcComp)
-        })
-        this.$emit('on-viewer-created', this.$dcComp)
+      if (!DC.Initialized || !DC.Viewer) {
+        return
+      }
+      this.$dcComp = new DC.Viewer(this.viewerId, {
+        ...this.config,
+        sceneMode: this.sceneMode
       })
+      this.$dcComp.setOptions(this.options)
+      this.$dcComp.tooltip.enable = this.enableTooltip
+      this.$dcComp.compass.enable = this.enableCompass
+      this.$dcComp.locationBar.enable = this.enableLocationBar
+      this.$dcComp.hawkeyeMap.enable = this.enableHawkeyeMap
+      this.registerEvents()
+      this.$children.forEach(component => {
+        component.$emit('on-viewer-ready', this.$dcComp)
+      })
+      this.$emit('on-viewer-created', this.$dcComp)
     }
+  },
+  created() {
+    DC && DC.ready()
   },
   mounted() {
     this.initViewer()

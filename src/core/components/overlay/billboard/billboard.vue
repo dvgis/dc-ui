@@ -22,8 +22,8 @@ export default {
   methods: {
     _setSize() {},
     initComponent() {
-      if (!this.$dcReady || !DC.Billboard) {
-        return false
+      if (!DC.Initialized || !DC.Billboard) {
+        return 
       }
       this.$dcComp = []
       if (Array.isArray(this.overlays)) {

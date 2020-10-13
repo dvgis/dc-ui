@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     initComponent() {
-      if (!this.$dcReady || !DC.GeoJsonLayer) {
+      if (!DC.Initialized || !DC.GeoJsonLayer) {
         return
       }
       this.$dcComp = new DC.GeoJsonLayer(this.id, this.url)

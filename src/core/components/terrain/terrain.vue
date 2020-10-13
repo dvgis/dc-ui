@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     initComponent() {
-      if (!this.$dcReady || !DC.TerrainFactory) {
+      if (!DC.Initialized || !DC.TerrainFactory) {
         return
       }
       this.$dcComp = DC.TerrainFactory.createTerrain(
@@ -33,9 +33,11 @@ export default {
       this.$viewer && this.$viewer.addTerrain(this.$dcComp)
     }
   },
-  mounted() {
+  created() {
     this.$on('on-viewer-ready', this.onViewerReady)
   },
-  destroyed() {}
+  destroyed() {
+    this.$viewer && this.$viewer.removeTerrain()
+  }
 }
 </script>

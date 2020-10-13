@@ -12,72 +12,19 @@ export default {
     id: {
       type: String,
       required: true
-    },
-    endTIme: Date,
-    duration: Number,
-    state: String
-  },
-  watch: {
-    endTIme: {
-      handler(newVal, oldVal) {
-        this._setTimeRange(newVal)
-      },
-      immediate: true,
-      deep: true
-    },
-    duration(newVal, oldVal) {
-      this._setTimeDuration(newVal)
-    },
-    state(newVal, oldVal) {
-      this._setState(newVal)
     }
   },
   methods: {
-    /**
-     * Sets time range
-     * @param endTime
-     * @private
-     */
-    _setTimeRange(endTime) {
-      this.$dcComp && this.$dcComp.setTimeRange(this.startTIme, endTime)
-    },
-    /**
-     * Sets time duration
-     * @param duration
-     * @private
-     */
-    _setTimeDuration(duration) {
-      this.$dcComp && this.$dcComp.setTimeDuration(this.startTIme, duration)
-    },
-    /**
-     * Sets state
-     * @param state
-     * @private
-     */
-    _setState(state) {
-      if (!this.$dcComp) {
-        return
-      }
-      if (state === DC.State.PLAY) {
-        this.$dcComp.play && this.$dcComp.play()
-      } else if (state === DC.State.PAUSE) {
-        this.$dcComp.pause && this.$dcComp.pause()
-      } else if (state === DC.State.RESTORE) {
-        this.$dcComp.restore && this.$dcComp.restore()
-      }
-    },
     initComponent() {
-      if (!this.$dcReady) {
+      if (!DC.Initialized || DC.RoamingPath) {
         return
       }
-      this.$dcComp = new DC.RoamingController(this.$viewer)
-      this.$children.forEach(component => {
-        component.$emit('on-roaming-controller-ready', this.$dcComp)
-      })
-    }
+      this.$dcComp = new DC.RoamingPath(this.id)
+    },
+    _addToController() {}
   },
   mounted() {
-    this.$on('on-viewer-ready', this.onViewerReady)
+    this.$on('on-roaming-controller-ready', this.onViewerReady)
   }
 }
 </script>

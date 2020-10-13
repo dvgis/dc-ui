@@ -12,7 +12,7 @@ export default {
   mixins: [layer],
   methods: {
     initComponent() {
-      if (!this.$dcReady || !DC.HtmlLayer) {
+      if (!DC.Initialized || !DC.HtmlLayer) {
         return
       }
       this.$dcComp = new DC.HtmlLayer(this.id)

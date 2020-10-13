@@ -45,8 +45,10 @@ export default {
       this.$layerGroup && this.$layerGroup.addLayer(this.$dcComp)
     }
   },
-  mounted() {
+  created() {
     this.$on('on-viewer-ready', this.onViewerReady)
+  },
+  mounted() {
     this.$on('on-layer-group-ready', this.onLayerGroupReady)
   },
   destroyed() {

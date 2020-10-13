@@ -5,9 +5,6 @@
 
 export default {
   methods: {
-    onDcReady() {
-      this.$dcReady = true
-    },
     onViewerReady(viewer) {
       this.$viewer = viewer
       this.initComponent && this.initComponent()
@@ -28,8 +25,5 @@ export default {
       this.initComponent && this.initComponent()
       this._addToController && this._addToController()
     }
-  },
-  mounted() {
-    this.$on('on-dc-ready', this.onDcReady)
   }
 }

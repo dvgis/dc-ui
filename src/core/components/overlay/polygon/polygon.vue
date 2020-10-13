@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     initComponent() {
-      if (!this.$dcReady || !DC.Polygon) {
+      if (!DC.Initialized || !DC.Polygon) {
         return
       }
       this.$dcComp = []

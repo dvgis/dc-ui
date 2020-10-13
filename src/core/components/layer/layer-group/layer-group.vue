@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     initComponent() {
-      if (!this.$dcReady || !DC.LayerGroup) {
+      if (!DC.Initialized || !DC.LayerGroup) {
         return
       }
       this.$dcComp = new DC.LayerGroup(this.id)
@@ -40,7 +40,7 @@ export default {
       this.$viewer && this.$viewer.addLayerGroup(this.$dcComp)
     }
   },
-  mounted() {
+  created() {
     this.$on('on-viewer-ready', this.onViewerReady)
   },
   destroyed() {

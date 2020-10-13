@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     initComponent() {
-      if (!this.$dcReady || !DC.Model) {
+      if (!DC.Initialized || !DC.Model) {
         return
       }
       this.$dcComp = []

@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     initComponent() {
-      if (!this.$dcReady || !DC.ImageryLayerFactory) {
+      if (!DC.Initialized || !DC.ImageryLayerFactory) {
         return
       }
       this.$dcComp = []
@@ -50,7 +50,7 @@ export default {
         })
     }
   },
-  mounted() {
+  created() {
     this.$on('on-viewer-ready', this.onViewerReady)
   },
   destroyed() {}

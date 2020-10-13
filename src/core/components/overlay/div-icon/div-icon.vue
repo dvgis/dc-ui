@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     initComponent() {
-      if (!this.$dcReady || !DC.DivIcon) {
+      if (!DC.Initialized || !DC.DivIcon) {
         return
       }
       this.$dcComp = []
