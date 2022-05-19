@@ -1,6 +1,6 @@
 {
   "name": "@dvgis/dc-ui",
-  "version": "1.0.0_beta",
+  "version": "1.0.1_beta",
   "main": "./dist/dc-ui.min.js",
   "repository": "https://github.com/dvgis/dc-ui.git",
   "author": "Caven Chen <cavencj@gmail.com>",
@@ -48,7 +48,7 @@
     "webpack-obfuscator": "^1.8.0"
   },
   "peerDependencies": {
-    "dc-sdk": "1.9.0",
+    "@dvgis/dc-sdk": "2.8.0",
     "vue": "^2.5.17"
   }
 }
